@@ -1,4 +1,5 @@
 'use strict'
+
 //Перемещение объекта с помощью стрелок клавиатуры
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -25,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
       };
    };
 
-   let square = new DomElement('.block', '100px', '100px', '#800080', '36px', 'absolute');
+   let square = new DomElement('.block', '100px', '100px', '#800080', 'absolute');
    document.body.append(square.createFunction());
 
    document.addEventListener('keydown', (event) => {
