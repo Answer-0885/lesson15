@@ -1,34 +1,50 @@
 'use strict'
 
-let body = document.querySelector('body');
+//Перемещение объекта с помощью стрелок клавиатуры
+document.addEventListener("DOMContentLoaded", function () {
 
-const DomElement = function (selector, height, width, bg, fontSize) {
-   this.selector = selector;
-   this.height = height;
-   this.width = width;
-   this.bg = bg;
-   this.fontSize = fontSize;
-   this.createFunction = function () {
+   const DomElement = function (selector, height, width, bg, fontSize, position) {
+      this.selector = selector;
+      this.height = height;
+      this.width = width;
+      this.bg = bg;
+      this.fontSize = fontSize;
+      this.position = position;
+      this.cssText = `height: ${this.height}; width: ${this.width}; background: ${this.bg}; font-size: ${this.fontSize};position: ${this.position};`;
+      this.createFunction = function () {
 
-      if (this.selector[0] == '.') {
-         let div = document.createElement('div');
-         div.classList.add(this.selector);
-         div.textContent = 'Create by div';
-         div.style.cssText = `height: ${this.height}; width: ${this.width}; background: ${this.bg}; font-size: ${this.fontSize};`;
-         body.append(div);
+         let newBlock;
 
-      } else if (this.selector[0] == '#') {
-         let p = document.createElement('p');
-         p.id = this.selector;
-         p.textContent = 'Create by paragraph';
-         p.style.cssText = `height: ${this.height}; width: ${this.width}; background: ${this.bg}; font-size: ${this.fontSize};`;
-         body.append(p);
-      }
+         if (this.selector[0] == '.') {
+            newBlock = document.createElement('div');
+         }
+
+         newBlock.style.cssText = this.cssText;
+         newBlock.style.cssText += `left: ${Math.round(window.innerWidth / 2 - parseInt(this.width) / 2)}px;`;
+         newBlock.style.cssText += `top: ${Math.round(window.innerHeight / 2 - parseInt(this.height) / 2)}px;`;
+
+         return newBlock;
+      };
    };
-};
 
-let newBlock = new DomElement('.block', '100px', '100%', 'blue', '36px');
-let newParagraph = new DomElement('#best', '150px', '100%', 'yellow', '36px');
+   let square = new DomElement('.block', '100px', '100px', '#800080', '36px', 'absolute');
+   document.body.append(square.createFunction());
 
-newBlock.createFunction();
-newParagraph.createFunction();
+   document.addEventListener('keydown', (event) => {
+      const line = 10;
+      const div = document.querySelector('div');
+      if (event.key === 'ArrowUp') {
+         div.style.top = parseInt(div.style.top) - line + 'px';
+      }
+      if (event.key === 'ArrowRight') {
+         div.style.left = parseInt(div.style.left) + line + 'px';
+      }
+      if (event.key === 'ArrowLeft') {
+         div.style.left = parseInt(div.style.left) - line + 'px';
+      }
+      if (event.key === 'ArrowDown') {
+         div.style.top = parseInt(div.style.top) + line + 'px';
+      }
+   });
+
+});
