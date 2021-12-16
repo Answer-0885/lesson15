@@ -1,16 +1,14 @@
 'use strict'
-
 //Перемещение объекта с помощью стрелок клавиатуры
 document.addEventListener("DOMContentLoaded", function () {
 
-   const DomElement = function (selector, height, width, bg, fontSize, position) {
+   const DomElement = function (selector, height, width, bg, position) {
       this.selector = selector;
       this.height = height;
       this.width = width;
       this.bg = bg;
-      this.fontSize = fontSize;
       this.position = position;
-      this.cssText = `height: ${this.height}; width: ${this.width}; background: ${this.bg}; font-size: ${this.fontSize};position: ${this.position};`;
+      this.cssText = `height: ${this.height}; width: ${this.width}; background: ${this.bg};position: ${this.position};`;
       this.createFunction = function () {
 
          let newBlock;
